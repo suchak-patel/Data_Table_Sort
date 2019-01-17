@@ -1,0 +1,187 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>htmlDataTable demo</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+
+    <style type="text/css">
+        * {
+            font-family: Segoe UI, SegoeUI, "Helvetica Neue", Helvetica, Arial, sans-serif;
+        }
+
+        .hide { display: none; }
+
+        /* .htmlDataTable thead, .htmlDataTable tbody, .htmlDataTable tfoot{ display: block; }
+        .htmlDataTable thead { z-i:1; }
+        .htmlDataTable tbody { overflow: auto; } */
+
+        .htmlDataTable thead { display: table-header-group; will-change: transform; }
+
+        /*https://docs.microsoft.com/en-us/windows/uwp/design/style/segoe-ui-symbol-font*/
+        .htmlDataTable th { position: relative; cursor: pointer; }
+        .htmlDataTable thead th, .htmlDataTable thead td { padding: 4px; }
+        .htmlDataTable th:hover { background: rgba(0,0,0,0.25); }
+        .htmlDataTable th::after { font-family: FabricMDL2Icons; display: inline-block; width: 32px; height: 32px; position: absolute; top: 5px; right: 5px; }
+        .htmlDataTable th.asc::after { content: "\E70E"; }  /* "\E70E" ChevronUp      "\E936" FlickUp      "\E96D" ChevronUpSmall      "\EB11" StockUp      "\EDDB" CaretUpSolid8 */
+        .htmlDataTable th.desc::after { content: "\E70D"; }  /* "\E70D" ChevronDown    "\E935" FlickDown    "\E96E" ChevronDownSmall    "\EB0F" StockDown    "\EDDC" CaretDownSolid8 */
+        .htmlDataTable thead, .htmlDataTable tfoot { background: rgb(174, 195, 233); }
+    </style>
+
+    <!-- <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" />
+    <link rel="stylesheet" href="https://static2.sharepointonline.com/files/fabric/office-ui-fabric-core/9.6.0/css/fabric.min.css" /> -->
+
+    <script type="text/javascript" src="https://code.jquery.com/jquery-3.3.1.min.js"></script>
+    <script type="text/javascript" src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+
+    <script type="text/javascript" src="htmlDataTable.js"></script>
+
+    <script type="text/javascript">
+        $(document).ready(function () {
+            console.log('document.ready called...');
+            
+            /*document.body.querySelectorAll('table.htmlDataTable').forEach(function(table) {
+                new htmlDataTable().initialize(table);
+            });*/
+            console.log("*");
+            var table = document.body.querySelectorAll('table.htmlDataTable');
+            for (let i = 0; i < table.length; i++) 
+            {
+                new htmlDataTable().initialize(table[i]);
+            }
+            console.log("#");
+        });
+    </script>
+</head>
+<body>
+    <noscript>
+        <style type="text/css">
+            .container-fluid { display: none !important; }
+        </style>
+
+        <h2>You need to have JavaScript enabled in order to use the newest version of the application.</h2>
+        <br />
+        <p>
+            <h2>To enable JavaScript in Google Chrome</h2>
+            <br />
+            <ol>
+                <li>On your computer, open Chrome.</li>
+                <li>At the top right, click "Customize and control Google Chrome" and then <b>Settings</b>.</li>
+                <li>At the bottom, click <b>Advanced</b>.</li>
+                <li>Under "Privacy and security," click <b>Content settings</b>.</li>
+                <li>Click <b>JavaScript</b>.</li>
+                <li>Turn on <b>Allowed (recommended)</b>.</li>
+            </ol>
+        </p>
+    </noscript>
+
+    <div class="container-fluid">
+        <h2>Demo - htmlDataTable</h2>
+        <table class="table list-data-table htmlDataTable" data-scroll="true">
+            <thead>
+                <tr>
+                    <th data-sort="string" data-filter="choice" data-footer="count" class="abc">String</th>
+                    <th data-sort="string" data-filter="choice" class="def">String</th>
+                    <th data-sort="number" data-filter="number" data-footer="sum">Number</th>
+                    <th data-sort="currency" data-filter="number" data-footer="sum">Currency</th>
+                    <th data-sort="percentage" data-filter="number" data-footer="average">Percentage</th>
+                    <th data-sort="date" data-filter="string">Date</th>
+                    <th>No Sort</th>
+                    <th data-sort="string" data-filter="string" data-footer="sum">No Data</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td>apple</td>
+                    <td>Strawberry</td>
+                    <td>45</td>
+                    <td>(450.0356)</td>
+                    <td>45%</td>
+                    <td>30-Jun-2005</td>
+                    <td>Item 0</td>
+                    <td></td>
+                </tr>
+                <tr>
+                    <td>Banana</td>
+                    <td>orange</td>
+                    <td>7698</td>
+                    <td>(7,698,345.00)</td>
+                    <td>76%</td>
+                    <td>1-Nov-2017</td>
+                    <td>Item 1</td>
+                    <td></td>
+                </tr>
+                <tr>
+                    <td>orange</td>
+                    <td>Banana</td>
+                    <td>4546</td>
+                    <td>(4,546.5401)</td>
+                    <td>86.56%</td>
+                    <td>1-Nov-1917</td>
+                    <td>Item 2</td>
+                    <td></td>
+                </tr>
+                <tr>
+                    <td>Strawberry</td>
+                    <td>apple</td>
+                    <td>987</td>
+                    <td>(19,875,555.0278)</td>
+                    <td>76%</td>
+                    <td>13-Feb-1979</td>
+                    <td>Item 3</td>
+                    <td></td>
+                </tr>
+                <tr>
+                    <td>Pear</td>
+                    <td>blueberry</td>
+                    <td>98743</td>
+                    <td>9,874.3044</td>
+                    <td>73%</td>
+                    <td>4-Aug-1845</td>
+                    <td>Item 4</td>
+                    <td></td>
+                </tr>
+                <tr>
+                    <td></td>
+                    <td>Apple</td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td>25-Jan-1742</td>
+                    <td>Item 8</td>
+                    <td></td>
+                </tr>
+                <tr>
+                    <td>blackberry</td>
+                    <td>Pear</td>
+                    <td>4</td>
+                    <td>40,566</td>
+                    <td>41%</td>
+                    <td>9-Jul-2018</td>
+                    <td>Item 5</td>
+                    <td></td>
+                </tr>
+                <tr>
+                    <td>blueberry</td>
+                    <td></td>
+                    <td>4</td>
+                    <td>(45,344,456.56)</td>
+                    <td>4%</td>
+                    <td></td>
+                    <td>Item 6</td>
+                    <td></td>
+                </tr>
+                <tr>
+                    <td></td>
+                    <td>APPLE</td>
+                    <td>589</td>
+                    <td></td>
+                    <td></td>
+                    <td>16-Mar-2014</td>
+                    <td>Item 7</td>
+                    <td></td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+</body>
+</html>
